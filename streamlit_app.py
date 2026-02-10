@@ -15,8 +15,20 @@ model = joblib.load(model_file)  # load .pkl file
 # Streamlit app title
 st.title("Concrete Compressive Strength Prediction")
 
+# --- About the model ---
+st.subheader("About the Model")
 st.markdown("""
-This app predicts the **compressive strength of concrete (MPa)** based on mix components and curing age.
+This app uses a **Random Forest Regressor** trained on concrete mix data to predict **compressive strength (in MPa)**. 
+The model considers **8 key features** of the concrete mixture:
+
+- **Cement, Blast Furnace Slag, Fly Ash**: Main binder materials.
+- **Water**: Affects hydration and strength.
+- **Superplasticizer**: Improves workability without adding more water.
+- **Coarse and Fine Aggregate**: Provide volume and affect strength.
+- **Age**: Number of days the concrete has cured.
+
+By entering the quantities of each component and the curing age, the model estimates the concrete strength. 
+This helps engineers **save time during mix design and testing phases**, allowing quick evaluation of different mix scenarios without performing physical tests.
 """)
 
 # --- Define input sliders for features ---
@@ -43,15 +55,3 @@ if st.button("Predict Concrete Strength"):
 
     st.success(f"Predicted Concrete Compressive Strength: {y_pred:.2f} MPa")
 
-# --- Page design ---
-st.markdown(
-    f"""
-    <style>
-    .stApp {{
-        background: url("https://images.unsplash.com/photo-1581091870622-3b4216be55d2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80");
-        background-size: cover
-    }}
-    </style>
-    """,
-    unsafe_allow_html=True
-)
