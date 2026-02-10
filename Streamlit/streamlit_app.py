@@ -1,10 +1,16 @@
+import os
 import joblib
 import streamlit as st
 import numpy as np
 import pandas as pd
 
 # Load trained Random Forest model
-model = joblib.load("random_forest_concrete.pkl")  # replace with your .pkl file
+model_file = "random_forest_concrete.pkl"
+if not os.path.exists(model_file):
+    st.error(f"Model file '{model_file}' not found.")
+    st.stop()
+
+model = joblib.load(model_file)  # load .pkl file
 
 # Streamlit app title
 st.title("Concrete Compressive Strength Prediction")
